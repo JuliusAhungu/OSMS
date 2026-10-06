@@ -1,0 +1,76 @@
+{% extends 'daycare/base.html' %}
+{% load static %}
+{% block title %}Shani Glorious Day Care Centre · Where great people are nurtured{% endblock %}
+{% block content %}
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-copy reveal">
+    <p class="eyebrow"><span class="eyebrow-dot"></span> A bright beginning in Tabora</p>
+    <h1 id="hero-title">Little steps.<br><em>Great futures.</em></h1>
+    <p class="hero-intro">A caring place to play, discover and grow. We help every child feel safe, seen and ready for what comes next.</p>
+    <div class="hero-actions"><a class="button button-green" href="#visit">Come say hello <span aria-hidden="true">↗</span></a><a class="text-link" href="#our-care">Explore our care <span aria-hidden="true">↓</span></a></div>
+    <div class="hero-proof"><div class="proof-mark"><img src="{% static 'daycare/images/logo.jpg' %}" alt=""></div><p><strong>SHANI GLORIOUS DAY CARE CENTRE</strong><br>Where great people are nurtured.</p></div>
+  </div>
+  <div class="hero-visual reveal">
+    <img class="hero-photo" src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=1200&q=85" alt="A young child enjoying time outdoors">
+    <div class="hero-sticker"><span>Little hearts</span><strong>big possibilities</strong><span class="sticker-flower" aria-hidden="true">✳</span></div>
+    <div class="hero-caption"><span class="caption-line"></span><span>Growing together, every day</span></div>
+  </div>
+  <div class="hero-index" aria-hidden="true">01 <span></span> 03</div>
+</section>
+
+<section class="ticker" aria-label="Our motto"><span>WHERE GREAT PEOPLE ARE NURTURED</span><i>✳</i><span>WHERE GREAT PEOPLE ARE NURTURED</span><i>✳</i><span>WHERE GREAT PEOPLE ARE NURTURED</span></section>
+
+<section class="intro section-pad" id="our-story">
+  <div class="section-kicker"><span>01 / OUR PROMISE</span><span class="kicker-rule"></span><span>CARE WITH PURPOSE</span></div>
+  <div class="intro-grid">
+    <h2>Every child has<br>a <em>spark.</em></h2>
+    <div class="intro-copy"><p>At Shani Glorious, childhood is full of wonder, questions and little victories. Our warm, attentive team creates the space for children to find their confidence and learn at their own pace.</p><a class="under-link" href="#visit">Get to know our centre <span aria-hidden="true">↗</span></a></div>
+  </div>
+  <div class="values-row">
+    <article class="value-item"><span class="value-number">01</span><span class="value-icon value-blue" aria-hidden="true">✳</span><h3>Safe to be curious</h3><p>Thoughtful care and a welcoming routine make room for exploration.</p></article>
+    <article class="value-item"><span class="value-number">02</span><span class="value-icon value-green" aria-hidden="true">↗</span><h3>Growing together</h3><p>Strong partnerships with families help little learners feel secure.</p></article>
+    <article class="value-item"><span class="value-number">03</span><span class="value-icon value-coral" aria-hidden="true">♡</span><h3>Learning through play</h3><p>Stories, movement and hands-on discovery bring each day to life.</p></article>
+  </div>
+</section>
+
+<section class="programs section-pad" id="our-care">
+  <div class="section-kicker"><span>02 / OUR CARE</span><span class="kicker-rule"></span><span>ROOM TO GROW</span></div>
+  <div class="program-heading"><h2>A good day starts<br>with <em>belonging.</em></h2><p>Gentle structure, joyful play and care that meets each child where they are.</p></div>
+  <div class="program-list">
+    <article class="program-row"><span class="program-index">A</span><div><h3>Little Explorers</h3><span class="program-age">1–2 years · Toddler care</span></div><p>Comfort, connection and sensory play for the first steps away from home.</p><span class="program-arrow" aria-hidden="true">↗</span></article>
+    <article class="program-row"><span class="program-index">B</span><div><h3>Curious Minds</h3><span class="program-age">3–4 years · Early years</span></div><p>Stories, art, movement and friendships that make discovery a daily habit.</p><span class="program-arrow" aria-hidden="true">↗</span></article>
+    <article class="program-row"><span class="program-index">C</span><div><h3>Ready for School</h3><span class="program-age">5–6 years · Pre-primary</span></div><p>Confident communication, early numeracy and independence through play.</p><span class="program-arrow" aria-hidden="true">↗</span></article>
+  </div>
+  <p class="fine-print">Programme placement is based on your child's age and readiness. Talk with us to find the right fit.</p>
+</section>
+
+<section class="day-story">
+  <div class="story-photo-wrap"><img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80" alt="Children sharing a playful moment together" loading="lazy"><span class="photo-label">A place to learn by doing</span></div>
+  <div class="story-copy"><span class="story-number">03 / A DAY WITH US</span><h2>Small moments<br>make <em>big things.</em></h2><p>A welcome at the door. A new word. A friend made over a shared story. We build days around the details that help children feel at home and brave enough to try.</p><a class="button button-outline" href="#visit">See the centre for yourself <span aria-hidden="true">↗</span></a><span class="story-doodle" aria-hidden="true">✳</span></div>
+</section>
+
+<section class="notices section-pad" id="notices">
+  <div class="section-kicker"><span>04 / CENTRE NOTES</span><span class="kicker-rule"></span><span>THE LATEST</span></div>
+  <div class="notices-head"><h2>Good things<br><em>coming up.</em></h2><p>Little updates and moments to look forward to from our centre.</p></div>
+  <div class="notice-columns">
+    <div class="notice-column"><h3>News from the centre <span>↘</span></h3>
+      {% for announcement in announcements %}<article class="notice-item"><time>{{ announcement.published_at|date:"d M Y" }}</time><div><h4>{{ announcement.title }}</h4><p>{{ announcement.body|truncatewords:24 }}</p></div></article>{% empty %}<p class="empty-note">Centre updates will appear here. We look forward to sharing our news with you.</p>{% endfor %}
+    </div>
+    <div class="notice-column events-column"><h3>Dates to remember <span>↘</span></h3>
+      {% for event in events %}<article class="event-item"><div class="event-date"><strong>{{ event.date|date:"d" }}</strong><span>{{ event.date|date:"M" }}</span></div><div><h4>{{ event.title }}</h4><p>{% if event.starts_at %}{{ event.starts_at|time:"H:i" }} · {% endif %}{{ event.location }}</p>{% if event.description %}<span class="event-description">{{ event.description|truncatewords:16 }}</span>{% endif %}</div></article>{% empty %}<p class="empty-note">No upcoming dates just yet. Please check back soon.</p>{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="visit-copy"><span class="story-number">COME MEET US</span><h2>Let's make a<br><em>bright beginning.</em></h2><p>Questions about a place for your child? Send a note or visit us in Ipuli Ward. We'd love to show you around.</p>
+    <div class="contact-lines"><a href="mailto:shaniglorious90@gmail.com"><span>EMAIL</span>shaniglorious90@gmail.com</a><div><span>FIND US</span>Ipuli Ward, Mlenda Street<br>Tabora, Tanzania</div><div><span>POST</span>P. O. Box 1568, Tabora</div></div>
+  </div>
+  <form class="visit-form" method="post" action="{% url 'daycare:home' %}#visit">
+    {% csrf_token %}<div class="form-heading"><span>ENQUIRE ABOUT ENROLMENT</span><p>Tell us a little about your family.</p></div>
+    {% for field in form %}<div class="field-group{% if field.name == 'message' %} field-wide{% endif %}"><label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %}<span>*</span>{% endif %}</label>{{ field }}{% for error in field.errors %}<small class="field-error">{{ error }}</small>{% endfor %}</div>{% endfor %}
+    <button class="button button-green form-submit" type="submit">Send your enquiry <span aria-hidden="true">↗</span></button>
+    <p class="form-privacy">Your details are only used to respond to your enquiry.</p>
+  </form>
+</section>
+{% endblock %}

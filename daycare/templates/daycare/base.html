@@ -1,0 +1,42 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eff7f5">
+  <meta name="description" content="Shani Glorious Day Care Centre in Ipuli Ward, Tabora. Where great people are nurtured.">
+  <title>{% block title %}Shani Glorious Day Care Centre{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'daycare/site.css' %}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  <div class="topline"><span>Ipuli Ward, Mlenda Street · Tabora, Tanzania</span><a href="mailto:shaniglorious90@gmail.com">shaniglorious90@gmail.com</a></div>
+  <header class="site-header">
+    <a class="brand" href="{% url 'daycare:home' %}">
+      <img src="{% static 'daycare/images/logo.jpg' %}" alt="Shani Glorious Day Care Centre logo">
+      <span><strong>Shani Glorious</strong><small>Day Care Centre</small></span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open navigation"><span></span><span></span></button>
+    <nav id="main-nav" class="main-nav" aria-label="Main navigation">
+      <a href="{% url 'daycare:home' %}#our-care">Our care</a>
+      <a href="{% url 'daycare:home' %}#our-story">Our story</a>
+      <a href="{% url 'daycare:home' %}#notices">What's on</a>
+      <a class="nav-cta" href="{% url 'daycare:home' %}#visit">Plan a visit <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+  {% if messages %}<div class="messages" aria-live="polite">{% for message in messages %}<p class="message {{ message.tags }}">{{ message }}</p>{% endfor %}</div>{% endif %}
+  <main>{% block content %}{% endblock %}</main>
+  <footer class="site-footer">
+    <div class="footer-brand"><img src="{% static 'daycare/images/logo.jpg' %}" alt=""><div><strong>Shani Glorious</strong><span>Where great people are nurtured.</span></div></div>
+    <div><span class="footer-label">Find us</span><p>P. O. Box 1568, Tabora, Tanzania<br>Ipuli Ward, Mlenda Street</p></div>
+    <div><span class="footer-label">Say hello</span><p><a href="mailto:shaniglorious90@gmail.com">shaniglorious90@gmail.com</a><br><a href="https://maps.google.com/?q=Ipuli+Ward+Mlenda+Street+Tabora+Tanzania">Get directions ↗</a></p></div>
+    <div class="footer-bottom"><span>© {% now "Y" %} Shani Glorious Day Care Centre</span><a href="{% url 'daycare:staff_login' %}">Staff sign in</a></div>
+  </footer>
+  <script src="{% static 'daycare/site.js' %}" defer></script>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

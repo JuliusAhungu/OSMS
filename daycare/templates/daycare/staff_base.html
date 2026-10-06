@@ -1,0 +1,33 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eef5f3">
+  <title>{% block title %}Centre desk{% endblock %} · Shani Glorious</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'daycare/site.css' %}">
+</head>
+<body class="staff-body">
+  <aside class="staff-sidebar">
+    <a class="staff-brand" href="{% url 'daycare:dashboard' %}"><img src="{% static 'daycare/images/logo.jpg' %}" alt=""><span><strong>Shani Glorious</strong><small>Centre desk</small></span></a>
+    <span class="side-label">WORKSPACE</span>
+    <nav class="staff-nav" aria-label="Staff navigation">
+      <a class="{% if request.resolver_match.url_name == 'dashboard' %}is-active{% endif %}" href="{% url 'daycare:dashboard' %}"><span>01</span>Overview</a>
+      <a class="{% if request.resolver_match.url_name == 'children' or request.resolver_match.url_name == 'child_create' or request.resolver_match.url_name == 'child_edit' %}is-active{% endif %}" href="{% url 'daycare:children' %}"><span>02</span>Children</a>
+      <a class="{% if request.resolver_match.url_name == 'attendance' %}is-active{% endif %}" href="{% url 'daycare:attendance' %}"><span>03</span>Attendance</a>
+      <a class="{% if request.resolver_match.url_name == 'fees' %}is-active{% endif %}" href="{% url 'daycare:fees' %}"><span>04</span>Fees</a>
+      <a class="{% if request.resolver_match.url_name == 'inquiries' %}is-active{% endif %}" href="{% url 'daycare:inquiries' %}"><span>05</span>Enquiries</a>
+      <a href="/admin/"><span>06</span>Full admin</a>
+    </nav>
+    <div class="sidebar-bottom"><span class="online-dot"></span><span>Centre workspace</span><a href="{% url 'daycare:home' %}">View public site ↗</a></div>
+  </aside>
+  <div class="staff-main">
+    <header class="staff-topbar"><div class="mobile-staff-brand"><img src="{% static 'daycare/images/logo.jpg' %}" alt=""><span>Shani Glorious</span></div><span class="staff-date">{{ today|date:"l, d F Y"|default:"Centre workspace" }}</span><div class="staff-user"><span class="user-avatar">{{ request.user.username|first|upper }}</span><span>{{ request.user.get_short_name|default:request.user.username }}</span><form method="post" action="{% url 'daycare:staff_logout' %}">{% csrf_token %}<button type="submit">Sign out</button></form></div></header>
+    {% if messages %}<div class="staff-messages" aria-live="polite">{% for message in messages %}<p>{{ message }}</p>{% endfor %}</div>{% endif %}
+    <main class="staff-content">{% block content %}{% endblock %}</main>
+  </div>
+  <script src="{% static 'daycare/site.js' %}" defer></script>
+</body>
+</html>

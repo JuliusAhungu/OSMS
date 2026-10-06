@@ -1,0 +1,8 @@
+{% extends 'daycare/staff_base.html' %}
+{% block title %}Attendance{% endblock %}
+{% block content %}
+<div class="page-heading"><div><span class="staff-eyebrow">CENTRE DESK / DAILY ROUTINE</span><h1>Take the register</h1><p>{{ today|date:"l, d F Y" }} · {{ children|length }} active children</p></div><span class="today-badge"><span class="online-dot"></span> TODAY</span></div>
+<form method="post" class="desk-panel attendance-panel">{% csrf_token %}<div class="attendance-toolbar"><span>CHILD</span><span>MARK AS</span></div>
+{% for row in attendance_rows %}<div class="attendance-row"><div class="table-person"><span class="child-avatar">{{ row.child.first_name|first|upper }}{{ row.child.last_name|first|upper }}</span><span><strong>{{ row.child }}</strong><small>{{ row.child.get_program_display }}</small></span></div><label class="visually-hidden" for="status-{{ row.child.pk }}">Attendance for {{ row.child }}</label><select id="status-{{ row.child.pk }}" name="status-{{ row.child.pk }}">{% for value,label in statuses %}<option value="{{ value }}"{% if row.current_status == value %} selected{% endif %}>{{ label }}</option>{% endfor %}</select></div>{% empty %}<p class="empty-note table-empty">Add active children to take today's register.</p>{% endfor %}
+{% if children %}<div class="form-actions"><span class="help-text">Changes are saved for today only.</span><button type="submit" class="button button-green">Save attendance <span aria-hidden="true">↗</span></button></div>{% endif %}</form>
+{% endblock %}
